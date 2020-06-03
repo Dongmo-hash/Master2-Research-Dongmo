@@ -28,56 +28,61 @@ public class EnregistrementEtudiant extends javax.swing.JFrame {
     /**
      * Creates new form EnregistrementEtudiant
      */
-   // Connection con = (Connection)connexion();
-    Statement st=null;
-    ResultSet rst=null;
-    PreparedStatement pst=null;
-    
+    // Connection con = (Connection)connexion();
+    Statement st = null;
+    ResultSet rst = null;
+    PreparedStatement pst = null;
+
     public EnregistrementEtudiant() {
         initComponents();
         show_Etudiant();
     }
-    
-   public String inscrireEtudiant(String email){ 
-    
-     return email;     
+
+    public String inscrireEtudiant(String email) {
+
+        return email;
     }
-             
-   public String inscrireEtudiantcni(String cni){ 
-    
-     return cni;     
+
+    public String inscrireEtudiantcni(String cni) {
+
+        return cni;
     }
-   
-   public String inscrireEtudiantmatricule(String matricule){ 
-    
-     return matricule;     
+
+    public int somme(int a, int b) {
+        return a + b;
     }
-   
-   public String inscrireEtudiantnom(String nom){ 
-    
-     return nom;     
+
+    public String inscrireEtudiantmatricule(String matricule) {
+
+        return matricule;
     }
-   
-   public String inscrireEtudiantprenom(String prenom){ 
-    
-     return prenom;     
+
+    public String inscrireEtudiantnom(String nom) {
+
+        return nom;
     }
-   
-   public String inscrireEtudiantfiliere(String filiere){ 
-    
-     return filiere;     
+
+    public String inscrireEtudiantprenom(String prenom) {
+
+        return prenom;
     }
-   
-   public String inscrireEtudiantniveau(String niveau){ 
-    
-     return niveau;     
+
+    public String inscrireEtudiantfiliere(String filiere) {
+
+        return filiere;
     }
-   
-   public int inscrireEtudiantage(int age){ 
-    
-     return age;     
+
+    public String inscrireEtudiantniveau(String niveau) {
+
+        return niveau;
     }
-  /*  
+
+    public int inscrireEtudiantage(int age) {
+
+        return age;
+    }
+
+    /*  
    String inscrireEtudiant(String email, String cni, String matricule,String nom,String prenom,String filiere, String niveau, int age){ 
      System.out.printf(email, cni, matricule, nom, prenom, filiere, niveau, age);
     // return email, cni, matricule, nom, prenom, filiere, niveau, age;
@@ -88,7 +93,6 @@ public class EnregistrementEtudiant extends javax.swing.JFrame {
  
         
     } */
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -345,7 +349,7 @@ public class EnregistrementEtudiant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void prenomfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prenomfieldActionPerformed
-     //    String prenom = prenomfield.getText().toString(); 
+        //    String prenom = prenomfield.getText().toString(); 
     }//GEN-LAST:event_prenomfieldActionPerformed
     public ArrayList<Etudiant> etudList() {
         ArrayList<Etudiant> etudList = new ArrayList<>();
@@ -353,129 +357,148 @@ public class EnregistrementEtudiant extends javax.swing.JFrame {
         try {
             con = (com.mysql.jdbc.Connection) connexion();
             String query = "SELECT * FROM etudiant";
-            st=con.createStatement();
+            st = con.createStatement();
             rst = st.executeQuery(query);
             Etudiant etud;
-            while(rst.next()){
-                etud=new Etudiant(rst.getString("email"), rst.getString("cni"), rst.getString("matricule"), rst.getString("nom"), rst.getString("prenom"),  rst.getString("filiere"), rst.getString("niveau"), rst.getInt("age"));
-                    etudList.add(etud);
+            while (rst.next()) {
+                etud = new Etudiant(rst.getString("email"), rst.getString("cni"), rst.getString("matricule"), rst.getString("nom"), rst.getString("prenom"), rst.getString("filiere"), rst.getString("niveau"), rst.getInt("age"));
+                etudList.add(etud);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(EnregistrementEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
         return etudList;
-   }
-   public void show_Etudiant(){
-    ArrayList<Etudiant> list = etudList();
-    DefaultTableModel model = (DefaultTableModel)tableau.getModel();
-    Object[] row = new Object[8];
-    for(int i=0; i<list.size(); i++){
-        row[0]=list.get(i).getNom();
-        row[1]=list.get(i).getPrenom();
-        row[2]=list.get(i).getAge();
-        row[3]=list.get(i).getCni();
-        row[4]=list.get(i).getEmail();
-        row[5]=list.get(i).getMatricule();
-        row[6]=list.get(i).getFiliere();
-        row[7]=list.get(i).getNiveau();
-        model.addRow(row);
-        
     }
-   }
+
+    public void show_Etudiant() {
+        ArrayList<Etudiant> list = etudList();
+        DefaultTableModel model = (DefaultTableModel) tableau.getModel();
+        Object[] row = new Object[8];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getNom();
+            row[1] = list.get(i).getPrenom();
+            row[2] = list.get(i).getAge();
+            row[3] = list.get(i).getCni();
+            row[4] = list.get(i).getEmail();
+            row[5] = list.get(i).getMatricule();
+            row[6] = list.get(i).getFiliere();
+            row[7] = list.get(i).getNiveau();
+            model.addRow(row);
+
+        }
+    }
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-        String email = emailfield.getText();                                               
-        String cni = cnifield.getText();                                           
-        String matricule = matriculefield.getText();                                       
+        String email = emailfield.getText();
+        String cni = cnifield.getText();
+        String matricule = matriculefield.getText();
         String nom = nomfield.getText();
-        String prenom = prenomfield.getText(); 
-        Integer age =Integer.parseInt(agefield.getText());
+        String prenom = prenomfield.getText();
+        Integer age = Integer.parseInt(agefield.getText());
         String filiere = niveaufield.getSelectedItem().toString();
         String niveau = filierefield.getSelectedItem().toString();
-                                                    
-      
-        
-        String query ="INSERT INTO etudiant (email, cni, matricule, nom, prenom, age, filiere, niveau) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try{
-           
-           con = (com.mysql.jdbc.Connection) connexion();
-           st=con.createStatement();
-           
-           
-           if(!email.equals("") &&!cni.equals("") &&!matricule.equals("") && !nom.equals("") && !prenom.equals("") && !age.equals("") && !filiere.equals("") && !niveau.equals("")){
-            pst=con.prepareStatement(query);
-            pst.setString(1, email);
-            pst.setString(2, cni);
-            pst.setString(3, matricule); 
-            pst.setString(4, nom);
-            pst.setString(5, prenom);
-            pst.setInt(6, age);
-            pst.setString(7, filiere);
-            pst.setString(8, niveau);
-        
-           pst.executeUpdate(); 
-           
-           emailfield.setText("");
-           cnifield.setText("");
-           matriculefield.setText("");
-           nomfield.setText("");
-           prenomfield.setText("");
-           agefield.setText("");
-           niveaufield.setSelectedIndex(0);
-           filierefield.setSelectedIndex(0);
-           DefaultTableModel model = (DefaultTableModel)tableau.getModel();
-           Object[] row = new Object[8];
-            row[0]=nom;
-            row[1]=prenom;
-            row[2]=age;
-            row[3]=cni;
-            row[4]=email;
-            row[5]=matricule;
-            row[6]=filiere;
-            row[7]=niveau;
-            model.addRow(row);
-          
-           JOptionPane.showMessageDialog(null, "votre ajout a ete effectuée avec succes!!!");
-            
-        }else{
-           JOptionPane.showMessageDialog(null, "votre ajout a ete effectuée avec succes!!!");
-           }   
-        }catch(SQLException e){
-          System.out.println(e.getMessage());  
+        boolean ajouter = insertionEtudiant(email, cni, matricule, nom, prenom, age, filiere, niveau);
+        if (ajouter) {
+            JOptionPane.showMessageDialog(null, "votre ajout a ete effectuée avec succes!!!");
+        } else {
+            JOptionPane.showMessageDialog(null, "votre ajout a echoué!!!");
         }
+    }
+
+    public boolean insertionEtudiant(String email, String cni, String matricule, String nom, String prenom, Integer age, String filiere, String niveau) {
+
+        String query = "INSERT INTO etudiant (email, cni, matricule, nom, prenom, age, filiere, niveau) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+
+            con = (com.mysql.jdbc.Connection) connexion();
+            st = con.createStatement();
+
+            if (!email.equals("") && !cni.equals("") && !matricule.equals("") && !nom.equals("") && !prenom.equals("") && !age.equals("") && !filiere.equals("") && !niveau.equals("")) {
+                pst = con.prepareStatement(query);
+                pst.setString(1, email);
+                pst.setString(2, cni);
+                pst.setString(3, matricule);
+                pst.setString(4, nom);
+                pst.setString(5, prenom);
+                pst.setInt(6, age);
+                pst.setString(7, filiere);
+                pst.setString(8, niveau);
+
+                pst.executeUpdate();
+
+                emailfield.setText("");
+                cnifield.setText("");
+                matriculefield.setText("");
+                nomfield.setText("");
+                prenomfield.setText("");
+                agefield.setText("");
+                niveaufield.setSelectedIndex(0);
+                filierefield.setSelectedIndex(0);
+                DefaultTableModel model = (DefaultTableModel) tableau.getModel();
+                Object[] row = new Object[8];
+                row[0] = nom;
+                row[1] = prenom;
+                row[2] = age;
+                row[3] = cni;
+                row[4] = email;
+                row[5] = matricule;
+                row[6] = filiere;
+                row[7] = niveau;
+                model.addRow(row);
+
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }//GEN-LAST:event_validerActionPerformed
 
+    public int countEtudiant() {
+        int result = 0;
+        try {
+            con = (com.mysql.jdbc.Connection) connexion();
+            String query = "SELECT COUNT(*) FROM etudiant";
+            st = con.createStatement();
+            rst = st.executeQuery(query);
+            result = rst.next() ? rst.getInt(1) : 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(EnregistrementEtudiant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-      
-           emailfield.setText("");
-           cnifield.setText("");
-           matriculefield.setText("");
-           nomfield.setText("");
-           prenomfield.setText("");
-           agefield.setText("");
-           niveaufield.setSelectedIndex(0);
-           filierefield.setSelectedIndex(0);
-        
+
+        emailfield.setText("");
+        cnifield.setText("");
+        matriculefield.setText("");
+        nomfield.setText("");
+        prenomfield.setText("");
+        agefield.setText("");
+        niveaufield.setSelectedIndex(0);
+        filierefield.setSelectedIndex(0);
+
     }//GEN-LAST:event_annulerActionPerformed
 
     private void nomfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomfieldActionPerformed
-     //   String nom = nomfield.getText().toString();
+        //   String nom = nomfield.getText().toString();
     }//GEN-LAST:event_nomfieldActionPerformed
 
     private void agefieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agefieldActionPerformed
-   //     String age = agefield.getText();
+        //     String age = agefield.getText();
     }//GEN-LAST:event_agefieldActionPerformed
 
     private void matriculefieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculefieldActionPerformed
-     //  String matricule = matriculefield.getText().toString();
+        //  String matricule = matriculefield.getText().toString();
     }//GEN-LAST:event_matriculefieldActionPerformed
 
     private void emailfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailfieldActionPerformed
-    //    String email = emailfield.getText().toString();
+        //    String email = emailfield.getText().toString();
     }//GEN-LAST:event_emailfieldActionPerformed
 
     private void cnifieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnifieldActionPerformed
-    //    String cni = cnifield.getText().toString();
+        //    String cni = cnifield.getText().toString();
     }//GEN-LAST:event_cnifieldActionPerformed
 
     private void validerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_validerMouseClicked
@@ -496,11 +519,11 @@ public class EnregistrementEtudiant extends javax.swing.JFrame {
     /*
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-      /*  try {
+     */
+ /*  try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -519,13 +542,13 @@ public class EnregistrementEtudiant extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-      /*  java.awt.EventQueue.invokeLater(new Runnable() {
+ /*  java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EnregistrementEtudiant().setVisible(true);
             }
         });
     }
-*/
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField agefield;
     private javax.swing.JButton annuler;
@@ -551,5 +574,4 @@ public class EnregistrementEtudiant extends javax.swing.JFrame {
     private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 
- 
 }

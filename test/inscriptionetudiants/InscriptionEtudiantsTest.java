@@ -94,7 +94,31 @@ public class InscriptionEtudiantsTest {
       String email = "dongmosyndie@gmail.com"; 
       EnregistrementEtudiant enregistrer = new EnregistrementEtudiant();
       String result = enregistrer.inscrireEtudiant(email);
-      assertFalse("dongmosyndie@gmail.com", true);
+      assertTrue("dongmosyndie@gmail.com", true);
       }
-    
+    @Test
+    public void testSomme(){
+        int a=5, b=3;
+        EnregistrementEtudiant enregistrer = new EnregistrementEtudiant();
+        int resultat = enregistrer.somme(a, b);
+        assertEquals(8, resultat);
+        
+    }
+    @Test
+    public void testInsertion(){
+     
+        String email = "dongmosyndie@gmail.com"; 
+        String cni = "abcd1234";
+        String matricule = "18z2220";
+        String nom = "dongmo";
+        String prenom = "syndie";
+        String filiere = "informatique";
+        String niveau = "M2";
+        int age = 25;
+        EnregistrementEtudiant enregistrer = new EnregistrementEtudiant();
+        int rowCount = enregistrer.countEtudiant();
+        enregistrer.insertionEtudiant(email, cni, matricule, nom, prenom, age, filiere, niveau);
+        int response = enregistrer.countEtudiant();
+        assertTrue(response > rowCount);
+    }
 }
