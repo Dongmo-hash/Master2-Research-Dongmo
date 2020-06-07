@@ -37,7 +37,8 @@ public class EnregistrementJUnitTest {
     public void tearDown() {
     }
 
-    
+        
+     @Test
      public void testeMain() {
      /*   int a = 4, b = 12;
         EnregistrementEtudiant enregistrer = new EnregistrementEtudiant();
@@ -83,15 +84,27 @@ public class EnregistrementJUnitTest {
       }
        @Test
     public void testetrue(){
-      String email = "dongmosyndie@gmail.com"; 
+      String email = "dongmoviada@gmail.com"; 
       EnregistrementEtudiant enregistrer = new EnregistrementEtudiant();
       String result = enregistrer.inscrireEtudiant(email);
-      assertFalse("dongmosyndie@gmail.com", true);
+      assertTrue("dongmoviada@gmail.com", true);
       }
-    
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-}
+        
+    @Test
+    public void testEnregistrement(){
+        
+        String email = "dongmoviada@gmail.com"; 
+        String cni = "abcd1124";
+        String matricule = "18z2221";
+        String nom = "dogmo";
+        String prenom = "syndie";
+        String filiere = "informatique";
+        String niveau = "M2";
+        int age = 25;
+        EnregistrementEtudiant enregistrer = new EnregistrementEtudiant();
+        int nbreRow = enregistrer.countEtudiant();
+        enregistrer.insertionEtudiant(email, cni, matricule, nom, prenom, age, filiere, niveau);
+        int calcul = enregistrer.countEtudiant();    
+        assertTrue(calcul > nbreRow);
+    }   
+   }

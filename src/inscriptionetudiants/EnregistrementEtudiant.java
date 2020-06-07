@@ -81,18 +81,6 @@ public class EnregistrementEtudiant extends javax.swing.JFrame {
 
         return age;
     }
-
-    /*  
-   String inscrireEtudiant(String email, String cni, String matricule,String nom,String prenom,String filiere, String niveau, int age){ 
-     System.out.printf(email, cni, matricule, nom, prenom, filiere, niveau, age);
-    // return email, cni, matricule, nom, prenom, filiere, niveau, age;
- //   String lister = "email"+"cni"+"matricule"+"nom"+"prenom"+"filiere"+"niveau"+age;
-    String lister = "email"+"cni"+"matricule"+"nom"+"prenom"+"filiere"+"niveau"+age;
-     return lister;
- //   return "email"+"cni"+"matricule"+"nom"+"prenom"+"filiere"+"niveau"+age;
- 
-        
-    } */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
